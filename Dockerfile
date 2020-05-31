@@ -9,5 +9,5 @@ RUN pip install -r requirements.txt
 ADD . /app
 
 FROM base
-CMD ["gunicorn", "-b", "0.0.0.0:80", "--log-level=info", "--reload", "tokenpay.wsgi:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:80", "--log-level=info", "--reload", "api.wsgi:app"]
 EXPOSE 80

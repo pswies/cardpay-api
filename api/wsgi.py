@@ -1,6 +1,6 @@
 import os
 
-from tokenpay.flaskapp import create_app
+from api.flaskapp import create_app
 
 
 app = create_app(os.environ)
