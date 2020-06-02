@@ -1,6 +1,6 @@
-# tokenpay-api
+# cardpay-api
 
-A Python API for token-based payments.
+A Python API for token-based card payments.
 
 It uses Braintree (braintreepayments.com) as the payment provider.
 This, however, can be easy replugged if needed.
@@ -16,7 +16,7 @@ Installed Docker.
 Build the Docker container:
 
     cd <project_dir>
-    docker build -t tokenpay-api .
+    docker build -t cardpay-api .
 
 Launch the HTTP API:
 
@@ -25,7 +25,7 @@ Launch the HTTP API:
         -e BRAINTREE_PUBLIC_KEY=<your-value> \
         -e BRAINTREE_PRIVATE_KEY=<your-value> \
         -e ENVIRONMENT=sandbox \
-        tokenpay-api
+        cardpay-api
 
 Ensure that it works:
 
@@ -46,5 +46,4 @@ Example user session:
 * Check coverage
 * Use linter
 * Ensure typehints
-* Rename project to cardpay-api
 * Add `created_at` to `PaymentTransaction`
