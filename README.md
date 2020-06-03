@@ -11,12 +11,24 @@ This, however, can be easy replugged if needed.
 Installed Docker.
 
 
-## Usage
+## Running tests
 
-Build the Docker container:
+Build the Docker container with development capabilities:
 
     cd <project_dir>
-    docker build -t cardpay-api .
+    docker build --target development -t cardpay-api-dev .
+
+Run tests:
+
+    docker run -it --rm -v $(pwd):/app cardpay-api-dev pytest
+
+
+## Local deployment
+
+Build the Docker container without development capabilities (or simply use the dev one described above):
+
+    cd <project_dir>
+    docker build --target base -t cardpay-api .
 
 Create `container.env` file with the following content:
 
@@ -25,7 +37,7 @@ Create `container.env` file with the following content:
     BRAINTREE_PRIVATE_KEY=<your-value>
     ENVIRONMENT=sandbox
 
-Launch the HTTP API for development:
+Launch the HTTP API locally:
 
     docker run -it --rm -p 8080:80 -v $(pwd):/app --env-file ./container.env cardpay-api
 
@@ -49,5 +61,4 @@ Production deployment details are beyond the scope of this documentation.
 * Add tests
 * Check coverage
 * Use linter
-* Ensure typehints
 * Add `created_at` to `PaymentTransaction`
