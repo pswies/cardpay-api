@@ -1,7 +1,7 @@
 # We use Python 3.7 to ensure compatibility with Braintree.
 # See: https://developers.braintreepayments.com/start/hello-server/python
 
-FROM python:3.7 AS base
+FROM python:3.7-alpine AS base
 WORKDIR /app
 ADD requirements.txt /app/
 RUN pip install --upgrade pip
