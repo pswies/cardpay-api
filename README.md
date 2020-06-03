@@ -18,7 +18,7 @@ Build the Docker container with development capabilities:
     cd <project_dir>
     docker build --target development -t cardpay-api-dev .
 
-Run tests:
+Run tests, mounting current directory directly:
 
     docker run -it --rm -v $(pwd):/app cardpay-api-dev pytest
 
@@ -39,7 +39,7 @@ Create `container.env` file with the following content:
 
 Launch the HTTP API locally:
 
-    docker run -it --rm -p 8080:80 -v $(pwd):/app --env-file ./container.env cardpay-api
+    docker run -it --rm -p 8080:80 --env-file ./container.env cardpay-api
 
 Ensure that it works:
 

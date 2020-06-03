@@ -47,14 +47,13 @@ class BraintreeProvider(PaymentProvider):
         Tokenise a card.
 
         Note the lack of customer ID. It is being generated ad hoc.
-        See base method description for details.
         """
         customer_id = self._gateway.customer.create().customer.id
 
         result = self._gateway.credit_card.create({
-            "customer_id": customer_id,
-            "number": card_number,
-            "expiration_date": expiry_date,
+            'customer_id': customer_id,
+            'number': card_number,
+            'expiration_date': expiry_date,
         })
 
         if result.is_success:
@@ -66,12 +65,10 @@ class BraintreeProvider(PaymentProvider):
     def make_sale(self, token: str, amount: str) -> PaymentTransaction:
         """
         Make card payment using a token.
-
-        See base method description for details.
         """
         result = self._gateway.transaction.sale({
-            "payment_method_token": token,
-            "amount": amount,
+            'payment_method_token': token,
+            'amount': amount,
         })
 
         if result.is_success:
