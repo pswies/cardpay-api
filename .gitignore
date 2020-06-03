@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # local meta notes for the project
-meta.txt
+meta
