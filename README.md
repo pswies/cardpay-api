@@ -18,14 +18,16 @@ Build the Docker container:
     cd <project_dir>
     docker build -t cardpay-api .
 
-Launch the HTTP API:
+Create `container.env` file with the following content:
 
-    docker run --rm -it -p 8080:80 -v $(pwd):/app \
-        -e BRAINTREE_MERCHANT_ID=<your-value> \
-        -e BRAINTREE_PUBLIC_KEY=<your-value> \
-        -e BRAINTREE_PRIVATE_KEY=<your-value> \
-        -e ENVIRONMENT=sandbox \
-        cardpay-api
+    BRAINTREE_MERCHANT_ID=<your-value>
+    BRAINTREE_PUBLIC_KEY=<your-value>
+    BRAINTREE_PRIVATE_KEY=<your-value>
+    ENVIRONMENT=sandbox
+
+Launch the HTTP API for development:
+
+    docker run -it --rm -p 8080:80 -v $(pwd):/app --env-file ./container.env cardpay-api
 
 Ensure that it works:
 
@@ -37,6 +39,8 @@ Example user session:
     {"token":"f4jp8wm"}
     $ curl -X POST localhost:8080/sale -H "Content-type: application/json" -d '{"token": "f4jp8wm", "amount": "7.99"}'
     {"amount":"7.99","currency":"EUR","id":"2sang9v1","status":"authorized"}
+
+Production deployment details are beyond the scope of this documentation.
 
 
 ## Todo
