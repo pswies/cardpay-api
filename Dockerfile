@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 COPY api ./api
 COPY payments ./payments
 
-CMD ["gunicorn", "-b", "0.0.0.0:80", "--log-level=info", "--reload", "api.wsgi:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:80", "--log-level=info", "api.wsgi:app"]
 EXPOSE 80
 
 
