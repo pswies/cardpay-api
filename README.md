@@ -59,8 +59,6 @@ Production deployment details are beyond the scope of this documentation.
 
 ## Todo
 
-* Add route tests
-* Handle payment errors gracefully
 * Check coverage
 * Use linter
 * Add `created_at` to `PaymentTransaction`

@@ -2,11 +2,19 @@ import mock
 
 import pytest
 
+from api.flaskapp import create_app
 from payments import BraintreeProvider
 
 
 @pytest.fixture
+def app():
+    app = create_app({})
+    yield app.app  # create_app returns a connexion.FlaskApp instance, this yields a Flask instance
+
+
+@pytest.fixture
 def provider():
+    """A BraintreeProvider instance with external calls mocked."""
     provider = BraintreeProvider(
         merchant_id='merchant-123',
         public_key='public-123',
