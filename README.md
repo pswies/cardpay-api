@@ -20,7 +20,7 @@ Build the Docker container with development capabilities:
 
 Run tests, mounting current directory directly:
 
-    docker run -it --rm -v $(pwd):/app cardpay-api-dev pytest
+    docker run -it --rm -v $(pwd):/app cardpay-api-dev pytest --cov=api --cov=payments
 
 
 ## Local deployment
@@ -55,10 +55,3 @@ Example user session:
 For convenience a Swagger UI is available at `localhost:8080/ui` .
 
 Production deployment details are beyond the scope of this documentation.
-
-
-## Todo
-
-* Check coverage
-* Use linter
-* Add `created_at` to `PaymentTransaction`
