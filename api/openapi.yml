@@ -19,6 +19,8 @@ paths:
                 properties:
                   reply:
                     type: string
+                example:
+                  reply: pong
   /tokenise:
     post:
       summary: Generate a token representing a card.
@@ -37,6 +39,9 @@ paths:
                   description: "Card expiration date, format: 'MM/YY' or 'MM/YYYY'."
                   type: string
                   pattern: '^\d{2}/\d{2,4}$'
+              example:
+                card_number: 4111111111111111
+                expiry_date: 06/2022
               additionalProperties: false
       responses:
         200:
@@ -48,6 +53,8 @@ paths:
                 properties:
                   token:
                     type: string
+                example:
+                  token: f4jp8wm
         400:
           description: Validation error.
   /sale:
@@ -67,6 +74,9 @@ paths:
                   description: 'The billing amount, e.g.: "10.35".'
                   type: string
                   pattern: '^\d{1,18}(\.\d{1,2})?$'
+              example:
+                token: f4jp8wm
+                amount: 7.99
               additionalProperties: false
       responses:
         200:
@@ -96,3 +106,8 @@ components:
         currency:
           description: ISO currency string.
           type: string
+      example:
+        id: 2sang9v1
+        status: authorized
+        amount: '7.99'
+        currency: EUR
