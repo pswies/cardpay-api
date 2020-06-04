@@ -1,0 +1,98 @@
+openapi: '3.0.2'
+info:
+  title: cardpay-api
+  description: A Python API for token-based card payments.
+  version: '1.0.0'
+
+paths:
+  /ping:
+    get:
+      summary: Check the API's vital signs.
+      operationId: api.views.ping
+      responses:
+        200:
+          description: The service is alive.
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reply:
+                    type: string
+  /tokenise:
+    post:
+      summary: Generate a token representing a card.
+      operationId: api.views.tokenise
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                card_number:
+                  description: 12-19 digit card number.
+                  type: string
+                  pattern: '^\d{12,19}$'
+                expiry_date:
+                  description: "Card expiration date, format: 'MM/YY' or 'MM/YYYY'."
+                  type: string
+                  pattern: '^\d{2}/\d{2,4}$'
+              additionalProperties: false
+      responses:
+        200:
+          description: A newly generated token - string used for making a sale.
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        400:
+          description: Validation error.
+  /sale:
+    post:
+      summary: Make card payment using a token.
+      operationId: api.views.sale
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  description: A result of card tokenisation.
+                  type: string
+                amount:
+                  description: 'The billing amount, e.g.: "10.35".'
+                  type: string
+                  pattern: '^\d{1,18}(\.\d{1,2})?$'
+              additionalProperties: false
+      responses:
+        200:
+          description: A newly created transaction.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTransaction'
+        400:
+          description: Validation error.
+
+components:                    
+  schemas:
+    PaymentTransaction:
+      description: A result of a sale.
+      type: object
+      properties:
+        id:
+          description: Transaction ID.
+          type: string
+        status:
+          description: Transaction status.
+          type: string
+        amount:
+          description: The paid amount.
+          type: string
+        currency:
+          description: ISO currency string.
+          type: string

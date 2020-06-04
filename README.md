@@ -43,7 +43,7 @@ Launch the HTTP API locally:
 
 Ensure that it works:
 
-    curl localhost:8080  # should greet the world
+    curl localhost:8080/ping
 
 Example user session:
 
@@ -52,13 +52,15 @@ Example user session:
     $ curl -X POST localhost:8080/sale -H "Content-type: application/json" -d '{"token": "f4jp8wm", "amount": "7.99"}'
     {"amount":"7.99","currency":"EUR","id":"2sang9v1","status":"authorized"}
 
+For convenience a Swagger UI is available at `localhost:8080/ui` .
+
 Production deployment details are beyond the scope of this documentation.
 
 
 ## Todo
 
-* Use OpenAPI
-* Add tests
+* Add route tests
+* Handle payment errors gracefully
 * Check coverage
 * Use linter
 * Add `created_at` to `PaymentTransaction`

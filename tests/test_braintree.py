@@ -34,7 +34,7 @@ def test_make_sale_success(provider, result_sale):
         'payment_method_token': 'token-123',
         'amount': '3.14',
     })
-    assert transaction.to_dict() == {
+    assert transaction.serialize() == {
         'id': 'transaction-123',
         'status': 'authorized',
         'amount': '7.00',

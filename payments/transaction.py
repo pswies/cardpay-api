@@ -9,7 +9,8 @@ class PaymentTransaction:
     * id: Transaction ID string.
     * status: String describing the current state of the transaction
       in the context of the payment's lifecycle.
-    * amount: Decimal containing the paid amount.
+    * amount: Internally - a decimal containing the paid amount; converted
+      to string only during serialization.
     * currency: ISO currency string.
     """
 
@@ -19,11 +20,12 @@ class PaymentTransaction:
         self.amount = amount
         self.currency = currency
 
-    def to_dict(self) -> dict:
+    def serialize(self) -> dict:
         """
-        Convert the object into a serializable dict.
+        Convert the object into a dict containing only serializable values.
 
-        In particular, the result is parsable by `json.dumps()`.
+        In particular, the result is parsable by the default Python JSON encoder.
+        The money amount is converted to string to avoid floating point-related caveats.
         """
         return {
             'id': self.id,

@@ -1,3 +1,5 @@
+import json
+
 from flask import current_app
 
 from payments import BraintreeProvider

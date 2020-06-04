@@ -1,9 +1,10 @@
 import logging
 
+import connexion
 from flask import Flask
 
-from api.routes import base_blueprint
 
+API_DEFINITION_PATH = './openapi.yml'
 
 # Config variables that can be overridden with envvars
 CUSTOM_CONFIG = {
@@ -14,15 +15,16 @@ CUSTOM_CONFIG = {
 }
 
 
-def create_app(user_config: dict) -> Flask:
+def create_app(config: dict) -> connexion.FlaskApp:
     logging.basicConfig(level=logging.DEBUG)
-    app = Flask(__name__)
 
-    custom_config = {
-        key: user_config.get(key, default_value)
+    parsed_config = {
+        key: config.get(key, default_value)
         for key, default_value in CUSTOM_CONFIG.items()
     }
 
-    app.config.update(custom_config)
-    app.register_blueprint(base_blueprint)
+    app = connexion.FlaskApp(__name__)
+    app.add_api(API_DEFINITION_PATH)
+    app.app.config.update(parsed_config)
+
     return app
