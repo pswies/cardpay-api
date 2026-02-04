@@ -3,7 +3,7 @@
 A Python API for token-based card payments.
 
 It uses Braintree (braintreepayments.com) as the payment provider.
-This, however, can be easy replugged if needed.
+This, however, can be easily replugged if needed.
 
 
 ## Prerequisites
